@@ -194,3 +194,12 @@ def fetch_data_index():
     data = _fetch_data("A51:A51")
     print(data)
     return data[0][0]
+
+def reset_index():
+    data = {
+        "valueRange": {
+            "range": "A51,A51",
+            "values": [[2]]
+        }
+    }   
+    _insert_data(data)

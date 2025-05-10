@@ -3,7 +3,6 @@ import os
 import json
 import hashlib
 
-from datetime import datetime, timezone, timedelta
 from tools import *
 
 import lark_oapi as lark
@@ -90,7 +89,6 @@ def do_p2_drive_file_edit_v1(data: lark.drive.v1.P2DriveFileEditV1) -> None:
         send_permission_card("chat_id", group_id, index)
     except:
         pass
-processed_indices = set()
 
 def do_card_action_trigger(data: P2CardActionTrigger) -> P2CardActionTriggerResponse:
     recv_data = json.loads(lark.JSON.marshal(data))
@@ -160,6 +158,7 @@ def run_bot():
     wsClient.start()
 
 def main():
+    reset_index()
     claer_table()
     initialize()  
     
