@@ -88,10 +88,7 @@ def _insert_data(data):
     }
     res = requests.put(url,headers=headers,data=json.dumps(data))
 
-    if res.status_code != 200:
-        print(res.text)
-    else:
-        print(res.text)
+
 
 
 def split_payload(payload):
@@ -144,10 +141,7 @@ def claer_table():
     }
     res = requests.put(url,headers=headers,data=json.dumps(data))
 
-    if res.status_code != 200:
-        print(res.text)
-    else:
-        print(res.text)
+
 
 
 
@@ -168,7 +162,6 @@ def initialize():
             f"client.drive.v1.file.subscribe failed, code: {response.code}, msg: {response.msg}, log_id: {response.get_log_id()}, resp: \n{json.dumps(json.loads(response.raw.content), indent=4, ensure_ascii=False)}")
         return
 
-    print(response.msg)
 
 def _fetch_data(table_range:str) -> json:
     url = f"https://open.feishu.cn/open-apis/sheets/v2/spreadsheets/{spreadsheet_token}/values/{sheet_id}!{table_range}"
@@ -188,7 +181,7 @@ def fetch_data_basic_info(index) -> json:
     return _fetch_data(f"A{index}:E{index}")
 
 def fetch_data_env_info(index) -> json:
-    return _fetch_data(f"G{index}:L{index}")
+    return _fetch_data(f"G{index}:M{index}")
 
 def fetch_data_index():
     data = _fetch_data("A51:A51")

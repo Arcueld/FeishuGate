@@ -28,6 +28,9 @@ def analyze_sandbox_environment(system_info: Dict[str, Any]) -> Dict[str, Any]:
     4. Path information
     5. Username and hostname patterns
     6. IP address characteristics
+    7. Temporary file count
+    
+    Please provide your analysis in the following exact format:
     
     System Information:
     - CPU Cores: {system_info.get('core_num')}
@@ -39,6 +42,7 @@ def analyze_sandbox_environment(system_info: Dict[str, Any]) -> Dict[str, Any]:
     - Username: {system_info.get('username')}
     - Hostname: {system_info.get('hostname')}
     - External IP: {system_info.get('external_ip')}
+    - Temporary File Count: {system_info.get('tempfile_num')}
     
     Please provide your analysis in the following exact format:
 
@@ -143,7 +147,7 @@ def get_sandbox_analysis(index: int) -> Dict[str, Any]:
         }
     
     # Check if all env info fields have values
-    if len(env_info) < 6 or any(not value for value in env_info[:6]):
+    if len(env_info) < 7 or any(not value for value in env_info[:7]):
         print(f"Warning: Incomplete environment info for index {index}")
         return {
             "is_sandbox": False,
@@ -162,7 +166,8 @@ def get_sandbox_analysis(index: int) -> Dict[str, Any]:
         'resolution': env_info[2],
         'current_path': env_info[3],
         'parent_process': env_info[4],
-        'boot_time': env_info[5]
+        'boot_time': env_info[5],
+        'tempfile_num': env_info[6],
     }
     
     return analyze_sandbox_environment(system_info) 

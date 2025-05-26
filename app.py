@@ -46,8 +46,7 @@ def send_permission_card(receive_id_type, receive_id, index):
     send_time, privilege, username, hostname, external_ip = data_basic_info
 
     data_env_info = fetch_data_env_info(index)[0]
-    core_num, ram, resolution, current_path, parent_process, boot_time = data_env_info
-
+    core_num, ram, resolution, current_path, parent_process, boot_time, tempfile_num = data_env_info
 
     try:
         from api import get_sandbox_analysis
@@ -55,6 +54,17 @@ def send_permission_card(receive_id_type, receive_id, index):
         print(f"是否沙箱: {sandbox_result['is_sandbox']}")
         print(f"置信度: {sandbox_result['confidence_score']}%")
         print(f"详细分析: {sandbox_result['analysis']}")
+        
+        # 如果是沙箱且置信度大于等于60，禁用准入按钮
+        access_is_disabled = str(sandbox_result['is_sandbox']) == "True" and int(sandbox_result['confidence_score']) >= 60
+        
+        # 根据沙箱检测结果自动执行准入/拒绝
+        if access_is_disabled:
+            insert_payload(index, False)
+            print(f"自动拒绝: 检测到沙箱环境 (置信度: {sandbox_result['confidence_score']}%)")
+        else:
+            print(f"等待人工决断: 未检测到沙箱环境或置信度不足")
+            
     except (ValueError, Exception) as e:
         print(f"沙箱检测失败: {str(e)}")
         sandbox_result = {
@@ -62,6 +72,7 @@ def send_permission_card(receive_id_type, receive_id, index):
             'confidence_score': "null",
             'analysis': "null"
         }
+        access_is_disabled = False
 
     content = json.dumps(
         {
@@ -83,7 +94,8 @@ def send_permission_card(receive_id_type, receive_id, index):
                     "boot_time": boot_time,
                     "is_sandbox": str(sandbox_result['is_sandbox']),
                     "confidence_score": str(sandbox_result['confidence_score']),
-                    "analysis": str(sandbox_result['analysis'])
+                    "analysis": str(sandbox_result['analysis']),
+                    "access_is_disabled": access_is_disabled
                 },
             },
         }
@@ -97,10 +109,12 @@ def do_p2_drive_file_edit_v1(data: lark.drive.v1.P2DriveFileEditV1) -> None:
     index = fetch_data_index()
     recv_data = fetch_data_basic_info(index)[0]
     send_time = recv_data[0]
-    if send_time in recent_send_times:
-        return        
     
-    recent_send_times.add(send_time)
+    if send_time in recent_send_times:
+        print(f"ignore duplicate event {send_time}")
+        return        
+    else:
+        recent_send_times.add(send_time)
 
     # 防抖动
     try:
@@ -177,7 +191,6 @@ def main():
     claer_table()
     initialize()  
     
-    print("Starting application...")
     run_bot()
 
 if __name__ == "__main__":
