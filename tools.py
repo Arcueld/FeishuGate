@@ -192,13 +192,13 @@ def fetch_data_env_info(index) -> json:
 
 def fetch_data_index():
     data = _fetch_data("A51:A51")
-    print(data)
+
     return data[0][0]
 
 def reset_index():
     data = {
         "valueRange": {
-            "range": "A51,A51",
+            "range": f"{sheet_id}!A51:A51",
             "values": [[2]]
         }
     }   
