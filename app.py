@@ -48,6 +48,21 @@ def send_permission_card(receive_id_type, receive_id, index):
     data_env_info = fetch_data_env_info(index)[0]
     core_num, ram, resolution, current_path, parent_process, boot_time = data_env_info
 
+
+    try:
+        from api import get_sandbox_analysis
+        sandbox_result = get_sandbox_analysis(index)
+        print(f"是否沙箱: {sandbox_result['is_sandbox']}")
+        print(f"置信度: {sandbox_result['confidence_score']}%")
+        print(f"详细分析: {sandbox_result['analysis']}")
+    except (ValueError, Exception) as e:
+        print(f"沙箱检测失败: {str(e)}")
+        sandbox_result = {
+            'is_sandbox': "null",
+            'confidence_score': "null",
+            'analysis': "null"
+        }
+
     content = json.dumps(
         {
             "type": "template",
@@ -66,6 +81,9 @@ def send_permission_card(receive_id_type, receive_id, index):
                     "current_path": current_path,
                     "parent_process": parent_process,
                     "boot_time": boot_time,
+                    "is_sandbox": str(sandbox_result['is_sandbox']),
+                    "confidence_score": str(sandbox_result['confidence_score']),
+                    "analysis": str(sandbox_result['analysis'])
                 },
             },
         }
@@ -96,10 +114,7 @@ def do_card_action_trigger(data: P2CardActionTrigger) -> P2CardActionTriggerResp
     
     index = int(recv_data["event"]["action"]["value"]["index"])
 
-    # 不知道怎么禁用按钮 就后端处理了
-    if index in processed_indices:
-        return
-    processed_indices.add(index)
+
 
     if action == "access":
         insert_payload(index, True)
