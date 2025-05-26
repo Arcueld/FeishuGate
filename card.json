@@ -1,260 +1,398 @@
 {
-    "schema": "2.0",
-    "config": {
-        "update_multi": true,
-        "style": {
-            "text_size": {
-                "normal_v2": {
-                    "default": "normal",
-                    "pc": "normal",
-                    "mobile": "heading"
+    "name": "准入",
+    "dsl": {
+        "schema": "2.0",
+        "config": {
+            "update_multi": true,
+            "style": {
+                "text_size": {
+                    "normal_v2": {
+                        "default": "normal",
+                        "pc": "normal",
+                        "mobile": "heading"
+                    }
                 }
             }
+        },
+        "body": {
+            "direction": "vertical",
+            "padding": "12px 12px 12px 12px",
+            "elements": [
+                {
+                    "tag": "column_set",
+                    "horizontal_spacing": "8px",
+                    "horizontal_align": "left",
+                    "columns": [
+                        {
+                            "tag": "column",
+                            "width": "weighted",
+                            "elements": [
+                                {
+                                    "tag": "markdown",
+                                    "content": "<font color=\"grey\">发起时间: </font>${send_time}",
+                                    "text_align": "left",
+                                    "text_size": "normal_v2",
+                                    "margin": "0px 0px 0px 0px"
+                                }
+                            ],
+                            "vertical_spacing": "8px",
+                            "horizontal_align": "left",
+                            "vertical_align": "top",
+                            "weight": 1
+                        },
+                        {
+                            "tag": "column",
+                            "width": "weighted",
+                            "elements": [
+                                {
+                                    "tag": "markdown",
+                                    "content": "<font color=\"grey\">权限: </font>${privilege}",
+                                    "text_align": "left",
+                                    "text_size": "normal_v2",
+                                    "margin": "0px 0px 0px 0px"
+                                }
+                            ],
+                            "vertical_spacing": "8px",
+                            "horizontal_align": "left",
+                            "vertical_align": "top",
+                            "weight": 1
+                        }
+                    ],
+                    "margin": "0px 0px 0px 0px"
+                },
+                {
+                    "tag": "column_set",
+                    "horizontal_spacing": "8px",
+                    "horizontal_align": "left",
+                    "columns": [
+                        {
+                            "tag": "column",
+                            "width": "weighted",
+                            "elements": [
+                                {
+                                    "tag": "markdown",
+                                    "content": "<font color=\"grey\">用户名: </font>${username}",
+                                    "text_align": "left",
+                                    "text_size": "normal_v2",
+                                    "margin": "0px 0px 0px 0px"
+                                }
+                            ],
+                            "vertical_spacing": "8px",
+                            "horizontal_align": "left",
+                            "vertical_align": "top",
+                            "weight": 1
+                        },
+                        {
+                            "tag": "column",
+                            "width": "weighted",
+                            "elements": [
+                                {
+                                    "tag": "markdown",
+                                    "content": "<font color=\"grey\">主机名: </font>${hostname}",
+                                    "text_align": "left",
+                                    "text_size": "normal_v2",
+                                    "margin": "0px 0px 0px 0px"
+                                }
+                            ],
+                            "vertical_spacing": "8px",
+                            "horizontal_align": "left",
+                            "vertical_align": "top",
+                            "weight": 1
+                        }
+                    ],
+                    "margin": "0px 0px 0px 0px"
+                },
+                {
+                    "tag": "column_set",
+                    "horizontal_spacing": "8px",
+                    "horizontal_align": "left",
+                    "columns": [
+                        {
+                            "tag": "column",
+                            "width": "weighted",
+                            "elements": [
+                                {
+                                    "tag": "markdown",
+                                    "content": "<font color=\"grey\">ip:</font> ${external_ip}",
+                                    "text_align": "left",
+                                    "text_size": "normal_v2",
+                                    "margin": "0px 0px 0px 0px"
+                                }
+                            ],
+                            "vertical_spacing": "8px",
+                            "horizontal_align": "left",
+                            "vertical_align": "top",
+                            "weight": 1
+                        },
+                        {
+                            "tag": "column",
+                            "width": "weighted",
+                            "elements": [
+                                {
+                                    "tag": "markdown",
+                                    "content": "<font color=\"grey\">index:</font> ${index}",
+                                    "text_align": "left",
+                                    "text_size": "normal_v2",
+                                    "margin": "0px 0px 0px 0px"
+                                }
+                            ],
+                            "vertical_spacing": "8px",
+                            "horizontal_align": "left",
+                            "vertical_align": "top",
+                            "weight": 1
+                        }
+                    ],
+                    "margin": "0px 0px 0px 0px"
+                },
+                {
+                    "tag": "column_set",
+                    "horizontal_spacing": "8px",
+                    "horizontal_align": "left",
+                    "columns": [
+                        {
+                            "tag": "column",
+                            "width": "weighted",
+                            "elements": [
+                                {
+                                    "tag": "markdown",
+                                    "content": "\n信息:\ncpu核心数目: ${core_num}\n物理内存(G): ${ram}\n分辨率: ${resolution}\n启动路径: ${current_path}\n父进程: ${parent_process}\n启动时间(分): ${boot_time}",
+                                    "text_align": "left",
+                                    "text_size": "normal_v2",
+                                    "margin": "0px 0px 0px 0px"
+                                }
+                            ],
+                            "vertical_spacing": "8px",
+                            "horizontal_align": "left",
+                            "vertical_align": "top",
+                            "weight": 1
+                        }
+                    ],
+                    "margin": "0px 0px 0px 0px"
+                },
+                {
+                    "tag": "column_set",
+                    "horizontal_spacing": "8px",
+                    "horizontal_align": "left",
+                    "columns": [
+                        {
+                            "tag": "column",
+                            "width": "weighted",
+                            "elements": [
+                                {
+                                    "tag": "button",
+                                    "text": {
+                                        "tag": "plain_text",
+                                        "content": "准入"
+                                    },
+                                    "type": "primary_filled",
+                                    "width": "default",
+                                    "size": "medium",
+                                    "disabled": "${button_is_disabled}",
+                                    "behaviors": [
+                                        {
+                                            "type": "callback",
+                                            "value": {
+                                                "action": "access",
+                                                "index": "${index}"
+                                            }
+                                        }
+                                    ],
+                                    "margin": "0px 0px 0px 0px",
+                                    "element_id": "access"
+                                }
+                            ],
+                            "vertical_spacing": "8px",
+                            "horizontal_align": "left",
+                            "vertical_align": "top",
+                            "weight": 1
+                        },
+                        {
+                            "tag": "column",
+                            "width": "weighted",
+                            "elements": [
+                                {
+                                    "tag": "button",
+                                    "text": {
+                                        "tag": "plain_text",
+                                        "content": "拒绝"
+                                    },
+                                    "type": "danger_filled",
+                                    "width": "default",
+                                    "size": "medium",
+                                    "disabled": "${button_is_disabled}",
+                                    "behaviors": [
+                                        {
+                                            "type": "callback",
+                                            "value": {
+                                                "action": "deny",
+                                                "index": "${index}"
+                                            }
+                                        }
+                                    ],
+                                    "margin": "0px 0px 0px 0px",
+                                    "element_id": "deny"
+                                }
+                            ],
+                            "vertical_spacing": "8px",
+                            "horizontal_align": "left",
+                            "vertical_align": "top",
+                            "weight": 1
+                        }
+                    ],
+                    "margin": "0px 0px 0px 0px"
+                },
+                {
+                    "tag": "markdown",
+                    "content": "##  AI 沙箱环境检测报告\n\n### 检测结论\n`是否是沙箱`: **${is_sandbox}**\n`可信度`: **${confidence_score}%**\n\n### 详细分析\n${analysis}",
+                    "text_align": "left",
+                    "text_size": "normal_v2",
+                    "margin": "0px 0px 0px 0px"
+                },
+                {
+                    "tag": "markdown",
+                    "content": "",
+                    "text_align": "left",
+                    "text_size": "normal_v2",
+                    "margin": "0px 0px 0px 0px"
+                }
+            ]
+        },
+        "header": {
+            "title": {
+                "tag": "plain_text",
+                "content": "准入请求"
+            },
+            "subtitle": {
+                "tag": "plain_text",
+                "content": ""
+            },
+            "template": "blue",
+            "icon": {
+                "tag": "standard_icon",
+                "token": "info_outlined"
+            },
+            "padding": "12px 12px 12px 12px"
         }
     },
-    "body": {
-        "direction": "vertical",
-        "padding": "12px 12px 12px 12px",
-        "elements": [
-            {
-                "tag": "column_set",
-                "horizontal_spacing": "8px",
-                "horizontal_align": "left",
-                "columns": [
-                    {
-                        "tag": "column",
-                        "width": "weighted",
-                        "elements": [
-                            {
-                                "tag": "markdown",
-                                "content": "<font color=\"grey\">发起时间: </font>${send_time}",
-                                "text_align": "left",
-                                "text_size": "normal_v2",
-                                "margin": "0px 0px 0px 0px"
-                            }
-                        ],
-                        "vertical_spacing": "8px",
-                        "horizontal_align": "left",
-                        "vertical_align": "top",
-                        "weight": 1
-                    },
-                    {
-                        "tag": "column",
-                        "width": "weighted",
-                        "elements": [
-                            {
-                                "tag": "markdown",
-                                "content": "<font color=\"grey\">权限: </font>${privilege}",
-                                "text_align": "left",
-                                "text_size": "normal_v2",
-                                "margin": "0px 0px 0px 0px"
-                            }
-                        ],
-                        "vertical_spacing": "8px",
-                        "horizontal_align": "left",
-                        "vertical_align": "top",
-                        "weight": 1
-                    }
-                ],
-                "margin": "0px 0px 0px 0px"
-            },
-            {
-                "tag": "column_set",
-                "horizontal_spacing": "8px",
-                "horizontal_align": "left",
-                "columns": [
-                    {
-                        "tag": "column",
-                        "width": "weighted",
-                        "elements": [
-                            {
-                                "tag": "markdown",
-                                "content": "<font color=\"grey\">用户名: </font>${username}",
-                                "text_align": "left",
-                                "text_size": "normal_v2",
-                                "margin": "0px 0px 0px 0px"
-                            }
-                        ],
-                        "vertical_spacing": "8px",
-                        "horizontal_align": "left",
-                        "vertical_align": "top",
-                        "weight": 1
-                    },
-                    {
-                        "tag": "column",
-                        "width": "weighted",
-                        "elements": [
-                            {
-                                "tag": "markdown",
-                                "content": "<font color=\"grey\">主机名: </font>${hostname}",
-                                "text_align": "left",
-                                "text_size": "normal_v2",
-                                "margin": "0px 0px 0px 0px"
-                            }
-                        ],
-                        "vertical_spacing": "8px",
-                        "horizontal_align": "left",
-                        "vertical_align": "top",
-                        "weight": 1
-                    }
-                ],
-                "margin": "0px 0px 0px 0px"
-            },
-            {
-                "tag": "column_set",
-                "horizontal_spacing": "8px",
-                "horizontal_align": "left",
-                "columns": [
-                    {
-                        "tag": "column",
-                        "width": "weighted",
-                        "elements": [
-                            {
-                                "tag": "markdown",
-                                "content": "<font color=\"grey\">ip:</font> ${external_ip}",
-                                "text_align": "left",
-                                "text_size": "normal_v2",
-                                "margin": "0px 0px 0px 0px"
-                            }
-                        ],
-                        "vertical_spacing": "8px",
-                        "horizontal_align": "left",
-                        "vertical_align": "top",
-                        "weight": 1
-                    },
-                    {
-                        "tag": "column",
-                        "width": "weighted",
-                        "elements": [
-                            {
-                                "tag": "markdown",
-                                "content": "<font color=\"grey\">index:</font> ${index}",
-                                "text_align": "left",
-                                "text_size": "normal_v2",
-                                "margin": "0px 0px 0px 0px"
-                            }
-                        ],
-                        "vertical_spacing": "8px",
-                        "horizontal_align": "left",
-                        "vertical_align": "top",
-                        "weight": 1
-                    }
-                ],
-                "margin": "0px 0px 0px 0px"
-            },
-            {
-                "tag": "column_set",
-                "horizontal_spacing": "8px",
-                "horizontal_align": "left",
-                "columns": [
-                    {
-                        "tag": "column",
-                        "width": "weighted",
-                        "elements": [
-                            {
-                                "tag": "markdown",
-                                "content": "\n信息:\ncpu核心数目: ${core_num}\n物理内存(G): ${ram}\n分辨率: ${resolution}\n启动路径: ${current_path}\n父进程: ${parent_process}\n启动时间(分): ${boot_time}",
-                                "text_align": "left",
-                                "text_size": "normal_v2",
-                                "margin": "0px 0px 0px 0px"
-                            }
-                        ],
-                        "vertical_spacing": "8px",
-                        "horizontal_align": "left",
-                        "vertical_align": "top",
-                        "weight": 1
-                    }
-                ],
-                "margin": "0px 0px 0px 0px"
-            },
-            {
-                "tag": "column_set",
-                "horizontal_spacing": "8px",
-                "horizontal_align": "left",
-                "columns": [
-                    {
-                        "tag": "column",
-                        "width": "weighted",
-                        "elements": [
-                            {
-                                "tag": "button",
-                                "text": {
-                                    "tag": "plain_text",
-                                    "content": "准入"
-                                },
-                                "type": "primary_filled",
-                                "width": "default",
-                                "size": "medium",
-                                "disabled": "${button_is_disabled}",
-                                "behaviors": [
-                                    {
-                                        "type": "callback",
-                                        "value": {
-                                            "action": "access",
-                                            "index": "${index}"
-                                        }
-                                    }
-                                ],
-                                "margin": "0px 0px 0px 0px",
-                                "element_id": "access"
-                            }
-                        ],
-                        "vertical_spacing": "8px",
-                        "horizontal_align": "left",
-                        "vertical_align": "top",
-                        "weight": 1
-                    },
-                    {
-                        "tag": "column",
-                        "width": "weighted",
-                        "elements": [
-                            {
-                                "tag": "button",
-                                "text": {
-                                    "tag": "plain_text",
-                                    "content": "拒绝"
-                                },
-                                "type": "danger_filled",
-                                "width": "default",
-                                "size": "medium",
-                                "disabled": "${button_is_disabled}",
-                                "behaviors": [
-                                    {
-                                        "type": "callback",
-                                        "value": {
-                                            "action": "deny",
-                                            "index": "${index}"
-                                        }
-                                    }
-                                ],
-                                "margin": "0px 0px 0px 0px",
-                                "element_id": "deny"
-                            }
-                        ],
-                        "vertical_spacing": "8px",
-                        "horizontal_align": "left",
-                        "vertical_align": "top",
-                        "weight": 1
-                    }
-                ],
-                "margin": "0px 0px 0px 0px"
-            }
-        ]
-    },
-    "header": {
-        "title": {
-            "tag": "plain_text",
-            "content": "准入请求"
+    "variables": [
+        {
+            "type": "text",
+            "apiName": "var_ma9jnmih",
+            "name": "send_time",
+            "desc": "",
+            "mockData": ""
         },
-        "subtitle": {
-            "tag": "plain_text",
-            "content": ""
+        {
+            "type": "text",
+            "apiName": "var_ma9jnmiu",
+            "name": "privilege",
+            "desc": "",
+            "mockData": ""
         },
-        "template": "blue",
-        "icon": {
-            "tag": "standard_icon",
-            "token": "info_outlined"
+        {
+            "type": "text",
+            "apiName": "var_ma9jnmj7",
+            "name": "username",
+            "desc": "",
+            "mockData": ""
         },
-        "padding": "12px 12px 12px 12px"
-    }
+        {
+            "type": "text",
+            "apiName": "var_ma9jnmjj",
+            "name": "hostname",
+            "desc": "",
+            "mockData": ""
+        },
+        {
+            "type": "text",
+            "apiName": "var_mab51rw6",
+            "name": "external_ip",
+            "desc": "",
+            "mockData": ""
+        },
+        {
+            "type": "text",
+            "apiName": "var_madgzqj5",
+            "name": "index",
+            "desc": "",
+            "mockData": ""
+        },
+        {
+            "type": "text",
+            "apiName": "var_madgzql1",
+            "name": "core_num",
+            "desc": "",
+            "mockData": ""
+        },
+        {
+            "type": "text",
+            "apiName": "var_madgzqmh",
+            "name": "ram",
+            "desc": "",
+            "mockData": ""
+        },
+        {
+            "type": "text",
+            "apiName": "var_madgzqr3",
+            "name": "current_path",
+            "desc": "",
+            "mockData": ""
+        },
+        {
+            "type": "text",
+            "apiName": "var_madgzqs2",
+            "name": "resolution",
+            "desc": "",
+            "mockData": ""
+        },
+        {
+            "type": "text",
+            "apiName": "var_madgzqsh",
+            "name": "parent_process",
+            "desc": "",
+            "mockData": ""
+        },
+        {
+            "type": "text",
+            "apiName": "var_madgzqsw",
+            "name": "boot_time",
+            "desc": "",
+            "mockData": ""
+        },
+        {
+            "type": "boolean",
+            "apiName": "var_mae1bj6y",
+            "name": "access_is_disabled",
+            "desc": "",
+            "mockData": false
+        },
+        {
+            "type": "boolean",
+            "apiName": "var_mae1bj7s",
+            "name": "button_is_disabled",
+            "desc": "",
+            "mockData": false
+        },
+        {
+            "type": "text",
+            "apiName": "var_mb3t9qcc",
+            "name": "is_sandbox",
+            "desc": "",
+            "mockData": "true"
+        },
+        {
+            "type": "text",
+            "apiName": "var_mb3t9qf8",
+            "name": "confidence_score",
+            "desc": "",
+            "mockData": "60"
+        },
+        {
+            "type": "text",
+            "apiName": "var_mb3t9qg9",
+            "name": "analysis",
+            "desc": "",
+            "mockData": ""
+        }
+    ]
 }
