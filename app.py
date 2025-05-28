@@ -46,8 +46,8 @@ def send_permission_card(receive_id_type, receive_id, index):
     send_time, privilege, username, hostname, external_ip = data_basic_info
 
     data_env_info = fetch_data_env_info(index)[0]
-    core_num, ram, resolution, current_path, parent_process, boot_time, tempfile_num = data_env_info
-
+    core_num, ram, resolution, current_path, parent_process, \
+     boot_time, tempfile_num , GPU_name, GPU_memory = data_env_info
     try:
         from api import get_sandbox_analysis
         sandbox_result = get_sandbox_analysis(index)
@@ -95,7 +95,9 @@ def send_permission_card(receive_id_type, receive_id, index):
                     "is_sandbox": str(sandbox_result['is_sandbox']),
                     "confidence_score": str(sandbox_result['confidence_score']),
                     "analysis": str(sandbox_result['analysis']),
-                    "access_is_disabled": access_is_disabled
+                    "access_is_disabled": access_is_disabled,
+                    "GPU_name": GPU_name,
+                    "GPU_memory": GPU_memory
                 },
             },
         }

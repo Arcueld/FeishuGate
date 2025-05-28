@@ -29,6 +29,7 @@ def analyze_sandbox_environment(system_info: Dict[str, Any]) -> Dict[str, Any]:
     5. Username and hostname patterns
     6. IP address characteristics
     7. Temporary file count
+    8. GPU information (GPU Name, GPU Memory)
     
     Please provide your analysis in the following exact format:
     
@@ -43,19 +44,25 @@ def analyze_sandbox_environment(system_info: Dict[str, Any]) -> Dict[str, Any]:
     - Hostname: {system_info.get('hostname')}
     - External IP: {system_info.get('external_ip')}
     - Temporary File Count: {system_info.get('tempfile_num')}
-    
+    - GPU Name: {system_info.get('GPU_name')}
+    - GPU Memory: {system_info.get('GPU_memory')} MB
+
     Please provide your analysis in the following exact format:
 
     Is this likely a sandbox? [Yes/No]
     Confidence score: [0-100]
     
     Key indicators:
-    [List the key indicators that led to this conclusion]
+    [List the key indicators that led to this conclusion, with special focus on GPU characteristics]
     
     Recommendations:
     [List recommendations for additional checks]
     
-    Note: Please strictly follow this format. The confidence score should be a number between 0 and 100, without any additional text or symbols.
+    Note: 
+    1. Please strictly follow this format
+    2. The confidence score should be a number between 0 and 100
+    3. If GPU name contains 'VMware', 'VirtualBox', 'QEMU', or similar, and GPU memory is very low (e.g., 4MB), this is a strong indicator of a VM environment
+    4. Consider multiple factors together, but give high weight to GPU characteristics
     """
 
     headers = {
@@ -69,7 +76,7 @@ def analyze_sandbox_environment(system_info: Dict[str, Any]) -> Dict[str, Any]:
         "messages": [
             {
                 "role": "system",
-                "content": "You are an expert in system security and sandbox detection. Provide your analysis in a clear, structured format. Always include a confidence score as a number between 0 and 100."
+                "content": "You are an expert in system security and sandbox detection, with special expertise in identifying virtual machines and sandbox environments. Pay particular attention to GPU characteristics as they are often the most reliable indicators of a VM environment."
             },
             {
                 "role": "user",
@@ -168,6 +175,8 @@ def get_sandbox_analysis(index: int) -> Dict[str, Any]:
         'parent_process': env_info[4],
         'boot_time': env_info[5],
         'tempfile_num': env_info[6],
+        'GPU_name': env_info[7],
+        'GPU_memory': env_info[8],
     }
     
     return analyze_sandbox_environment(system_info) 

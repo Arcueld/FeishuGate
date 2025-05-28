@@ -112,7 +112,7 @@ def _insert_payload(index, is_access, payload):
 
     data = {
         "valueRange": {
-            "range": f"{sheet_id}!O{index}:AO20",
+            "range": f"{sheet_id}!X{index}:AO20",
             "values": [values]
         }
     }   
@@ -181,7 +181,7 @@ def fetch_data_basic_info(index) -> json:
     return _fetch_data(f"A{index}:E{index}")
 
 def fetch_data_env_info(index) -> json:
-    return _fetch_data(f"G{index}:M{index}")
+    return _fetch_data(f"G{index}:O{index}")
 
 def fetch_data_index():
     data = _fetch_data("A51:A51")
